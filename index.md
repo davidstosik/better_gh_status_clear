@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+<a href="javascript:alert('hello');">Test</a>
