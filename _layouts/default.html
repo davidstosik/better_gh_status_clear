@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+    {% seo %}
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+        <br> <!-- push link list to the right -->
+
+        <ul>
+          {% for link in site.data.external_links %}
+            <li><a href="{{ link.url }}">{{ link.title }} ↗</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <h1>{{ site.title }}</h1>
+      <p>{{ site.description }}</p>
+      </p>
+    </header>
+
+    <main>
+      {{ content }}
+    </main>
+  </body>
+</html>

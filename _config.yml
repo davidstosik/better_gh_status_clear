@@ -5,5 +5,8 @@ description: >-
 baseurl: "/better_gh_status_clear"
 url: "davidstosik.github.io"
 
-markdown: kramdown
-theme: minima
+plugins:
+- jekyll-seo-tag
+
+exclude:
+- bookmarklet.js
