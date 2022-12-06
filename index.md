@@ -37,6 +37,10 @@ After opening the "Set status" modal window on GitHub, click on the bookmarklet 
 
 You can now select freely the date and time at which to clear your GitHub status!
 
+### Video
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/i_ZYsciQHog" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## What is a bookmarklet?
 
 According to Wikipedia's page on [Bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet):
