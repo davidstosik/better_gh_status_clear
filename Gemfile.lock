@@ -256,6 +256,10 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages (~> 227)
+  jekyll (~> 3.9.2)
+  jekyll-feed (~> 0.6)
+  kramdown-parser-gfm
+  minima (~> 2.0)
 
 BUNDLED WITH
    2.3.24
