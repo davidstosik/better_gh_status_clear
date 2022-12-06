@@ -1,6 +1,6 @@
-title: Better GitHub status clear
+title: ⏲️  Better GitHub status time picker
 description: >-
-  A bookmarklet that lets you pick date and time to clear your GitHub status.
+  Freely pick when your GitHub status clears!
 
 baseurl: "/better_gh_status_clear"
 url: "davidstosik.github.io"
