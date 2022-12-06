@@ -27,7 +27,7 @@ The simplest way to do so is to drag'n'drop the button below to your bookmarks b
 
 {% capture bookmarklet %}{% include_relative bookmarklet.js %}{% endcapture %}
 
-[**Better GH status clear**](javascript:{{ bookmarklet | strip_newlines | escape }})
+[**Better GH status clear**](javascript:{{ bookmarklet | strip_newlines | escape | replace: "|", "%7C" }})
 
 ⬆️  Drag and drop the button above to your bookmarks!
 
