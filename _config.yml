@@ -7,6 +7,3 @@ url: "davidstosik.github.io"
 
 plugins:
 - jekyll-seo-tag
-
-exclude:
-- bookmarklet.js
