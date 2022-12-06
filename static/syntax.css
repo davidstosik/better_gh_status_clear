@@ -1,7 +1,8 @@
 /* This first style disables MVP.css' color style for <code> tags. */
-code {
+pre, code, pre code {
   background-color: inherit;
   color: inherit;
+  max-width: 100%;
 }
 
 /* The rest of this file was generated with the following command:
