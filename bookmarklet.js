@@ -1,5 +1,15 @@
 (() => {
-  const clearStatusDiv = document.querySelector(".js-user-status-expiration-date-input").parentElement;
+  if (document.location.host !== "github.com") {
+    alert("This bookmarklet only works on GitHub.");
+    return;
+  };
+
+  const clearStatusDiv = document.querySelector("input.js-user-status-expiration-date-input")?.parentElement;
+
+  if (!clearStatusDiv?.checkVisibility()) {
+    alert("Please open the 'Set status' modal first.");
+    return;
+  };
 
   const html = `\
     <div class="f5 pt-3 pb-2">
