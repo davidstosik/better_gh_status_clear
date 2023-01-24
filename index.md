@@ -12,7 +12,7 @@ GitHub only provides a few options to automatically clear one's status in the fu
 
 This can be annoying if for example, one wants to set a "busy" status for a couple weeks in a row, or even until a later day in the week.
 
-The bookmarklet provided below replaces the limited option with a date and a time picker, which provide complete flexibility in how to set when that GitHub status will be cleared.
+The tool provided below replaces the limited options with a date and a time picker, which provide complete flexibility in how to set the date and time when that GitHub status will be cleared.
 
 <img src="{{site.baseurl}}/static/better-gh-status-clear.png" alt="Better GH status clear screenshot" width="458" />
 
