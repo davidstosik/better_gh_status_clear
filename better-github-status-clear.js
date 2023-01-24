@@ -1,8 +1,6 @@
 class BetterGitHubStatusClear {
   static run() {
-    const clearStatusDiv = document
-      .querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)")
-      ?.parentElement;
+    const clearStatusDiv = this.clearStatusDiv();
 
     if (!clearStatusDiv?.checkVisibility()) {
       return;
@@ -82,6 +80,25 @@ class BetterGitHubStatusClear {
     clearStatusDiv.parentElement.querySelector("[name='clear-time']").addEventListener("input", updateHiddenInput);
 
     clearStatusDiv.remove();
-  }
-}
+  };
 
+  static ensureContext() {
+    if (document.location.host !== "github.com") {
+      alert("This bookmarklet only works on GitHub.");
+      return false;
+    };
+
+    if (!this.clearStatusDiv()?.checkVisibility()) {
+      alert("Please open the 'Set status' modal first.");
+      return false;
+    };
+
+    return true;
+  }
+
+  static clearStatusDiv() {
+    return document
+      .querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)")
+      ?.parentElement;
+  };
+}

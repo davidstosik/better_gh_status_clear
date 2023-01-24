@@ -45,6 +45,8 @@ Add the userscript to your userscript manager. (For example, Violentmonkey will 
 
 Once installed and if enabled, the userscript will automatically fire up and change GitHub's status modal when it pops up!
 
+---
+
 ### Bookmarklet
 
 #### Install
@@ -52,7 +54,16 @@ Once installed and if enabled, the userscript will automatically fire up and cha
 You can install the bookmarklet by adding it to your browser's bookmarks.
 The simplest way to do so is to drag'n'drop the button below to your bookmarks bar.
 
-{% capture bookmarklet %}{% include_relative bookmarklet.js %}{% endcapture %}
+{% capture bookmarklet %}
+  (() => {
+
+{% include_relative better-github-status-clear.js %}
+
+    if (!BetterGitHubStatusClear.ensureContext()) return;
+
+    BetterGitHubStatusClear.run();
+  })();
+{% endcapture %}
 
 [**Better GH status clear (bookmarklet)**](javascript:{{ bookmarklet | strip_newlines | escape | replace: "|", "%7C" }})
 
@@ -76,7 +87,7 @@ According to Wikipedia's page on [Bookmarklet](https://en.wikipedia.org/wiki/Boo
 
 #### Source code
 
-The bookmarklet's source code can be checked below, as well as on [GitHub](https://github.com/davidstosik/better_gh_status_clear):
+You can check the bookmarklet's uncompressed source code below:
 
 ```js
 {{ bookmarklet }}
