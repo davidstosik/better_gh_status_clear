@@ -49,6 +49,12 @@ Once installed and if enabled, the userscript will automatically fire up and cha
 
 ### Bookmarklet
 
+#### What is a bookmarklet?
+
+According to Wikipedia's page on [Bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet):
+
+> A bookmarklet is a bookmark stored in a web browser that contains JavaScript commands that add new features to the browser.
+
 #### Install
 
 You can install the bookmarklet by adding it to your browser's bookmarks.
@@ -78,12 +84,6 @@ You can now select freely the date and time at which to clear your GitHub status
 #### Video
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/i_ZYsciQHog" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-#### What is a bookmarklet?
-
-According to Wikipedia's page on [Bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet):
-
-> A bookmarklet is a bookmark stored in a web browser that contains JavaScript commands that add new features to the browser.
 
 #### Source code
 
