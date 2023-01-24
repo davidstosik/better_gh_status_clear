@@ -10,4 +10,4 @@
 // @require     https://github.com/davidstosik/better_gh_status_clear/raw/factorize/better-github-status-clear.js
 // ==/UserScript==
 
-VM.observe(document.body, BetterGitHubStatusClear.run);
+VM.observe(document.body, () => { BetterGitHubStatusClear.run(); });

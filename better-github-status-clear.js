@@ -1,10 +1,10 @@
 class BetterGitHubStatusClear {
   static run() {
-    const clearStatusDiv = this.clearStatusDiv();
+    const clearStatusDiv = this.getClearStatusDiv();
 
     if (!clearStatusDiv?.checkVisibility()) {
       return;
-    }
+    };
 
     var previousDateString = "";
     var previousTimeString = "";
@@ -70,7 +70,7 @@ class BetterGitHubStatusClear {
         hiddenInput.value = "";
         console.log("Erased clear date.");
       } else {
-        dateTime = new Date(`${dateString} ${timeString}`);
+        const dateTime = new Date(`${dateString} ${timeString}`);
         hiddenInput.value = dateTime.toISOString();
         console.log(`Set clear date to ${dateTime}.`);
       };
@@ -88,15 +88,15 @@ class BetterGitHubStatusClear {
       return false;
     };
 
-    if (!this.clearStatusDiv()?.checkVisibility()) {
+    if (!this.getClearStatusDiv()?.checkVisibility()) {
       alert("Please open the 'Set status' modal first.");
       return false;
     };
 
     return true;
-  }
+  };
 
-  static clearStatusDiv() {
+  static getClearStatusDiv() {
     return document
       .querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)")
       ?.parentElement;
