@@ -20,34 +20,61 @@ Going on a long weekend, and want to be marked away until your return on Tuesday
 
 ## How to use?
 
-### Install
+There are two ways to use this tool:
+
+1. [A userscript.](#userscript)
+2. [A bookmarklet.](#bookmarklet)
+
+### Userscript
+
+#### What is a userscript?
+
+According to Wikipedia's page on [Userscript](https://en.wikipedia.org/wiki/Userscript):
+
+> A userscript (or user script) is a program, usually written in JavaScript, for modifying web pages to augment browsing.
+
+You can run userscripts in your browser using a [userscript manager](https://en.wikipedia.org/wiki/Userscript_manager), such as [Violentmonkey](https://violentmonkey.github.io/).
+
+#### Install
+
+Add the userscript to your userscript manager. (For example, Violentmonkey will automatically come up when you click the link.)
+
+[**Better GH status clear (userscript)**](https://github.com/davidstosik/better_gh_status_clear/raw/main/better-gh-status-clear.user.js)
+
+#### Use
+
+Once installed and if enabled, the userscript will automatically fire up and change GitHub's status modal when it pops up!
+
+### Bookmarklet
+
+#### Install
 
 You can install the bookmarklet by adding it to your browser's bookmarks.
 The simplest way to do so is to drag'n'drop the button below to your bookmarks bar.
 
 {% capture bookmarklet %}{% include_relative bookmarklet.js %}{% endcapture %}
 
-[**Better GH status clear**](javascript:{{ bookmarklet | strip_newlines | escape | replace: "|", "%7C" }})
+[**Better GH status clear (bookmarklet)**](javascript:{{ bookmarklet | strip_newlines | escape | replace: "|", "%7C" }})
 
 ⬆️  Drag and drop the button above to your bookmarks!
 
-### Use
+#### Use
 
 After opening the "Set status" modal window on GitHub, click on the bookmarklet in your browser to replace the date/time picker.
 
 You can now select freely the date and time at which to clear your GitHub status!
 
-### Video
+#### Video
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/i_ZYsciQHog" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## What is a bookmarklet?
+#### What is a bookmarklet?
 
 According to Wikipedia's page on [Bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet):
 
 > A bookmarklet is a bookmark stored in a web browser that contains JavaScript commands that add new features to the browser.
 
-## Source code
+#### Source code
 
 The bookmarklet's source code can be checked below, as well as on [GitHub](https://github.com/davidstosik/better_gh_status_clear):
 
