@@ -7,7 +7,7 @@
 // @author      David Stosik
 // @description Freely pick when your GitHub status clears!
 // @require     https://cdn.jsdelivr.net/npm/@violentmonkey/dom@2
-// @require     https://github.com/davidstosik/better_gh_status_clear/raw/factorize/better-github-status-clear.js
+// @require     https://github.com/davidstosik/better_gh_status_clear/raw/main/better-github-status-clear.js
 // ==/UserScript==
 
 VM.observe(document.body, () => { BetterGitHubStatusClear.run(); });
