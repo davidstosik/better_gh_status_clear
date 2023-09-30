@@ -3,7 +3,7 @@
 // @namespace   https://github.com/davidstosik
 // @match       https://github.com/*
 // @grant       none
-// @version     1.2
+// @version     1.3
 // @author      David Stosik
 // @description Freely pick when your GitHub status clears!
 // @require     https://cdn.jsdelivr.net/npm/@violentmonkey/dom@2

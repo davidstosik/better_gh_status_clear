@@ -9,12 +9,17 @@ class BetterGitHubStatusClear {
     var previousDateString = "";
     var previousTimeString = "";
     var helpMessage = "";
+    var previousDateMatch = null;
 
-    const previousDateMatch = clearStatusDiv
-      .querySelector(".js-user-status-expiration-interval-selected")
-      .textContent
-      .trim()
-      .match(/^in (?<count>\d+) (?<unit>minute|hour|day|month|year)s?$/);
+    const previousDateInput = clearStatusDiv
+      .querySelector(".js-user-status-expiration-interval-selected");
+
+    if (previousDateInput) {
+      previousDateMatch = previousDateInput
+        .textContent
+        .trim()
+        .match(/^in (?<count>\d+) (?<unit>minute|hour|day|month|year)s?$/);
+    }
 
     if (previousDateMatch) {
       const count = parseInt(previousDateMatch.groups.count);
@@ -79,6 +84,7 @@ class BetterGitHubStatusClear {
     clearStatusDiv.parentElement.querySelector("[name='clear-date']").addEventListener("input", updateHiddenInput);
     clearStatusDiv.parentElement.querySelector("[name='clear-time']").addEventListener("input", updateHiddenInput);
 
+    this.getOriginalClearStatusInput().remove();
     clearStatusDiv.remove();
   };
 
@@ -97,8 +103,11 @@ class BetterGitHubStatusClear {
   };
 
   static getClearStatusDiv() {
-    return document
-      .querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)")
-      ?.parentElement;
+    return this.getOriginalClearStatusInput()?.previousElementSibling;
+  };
+
+
+  static getOriginalClearStatusInput() {
+    return document.querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)");
   };
 }
