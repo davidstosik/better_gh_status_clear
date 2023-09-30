@@ -61,14 +61,14 @@ You can install the bookmarklet by adding it to your browser's bookmarks.
 The simplest way to do so is to drag'n'drop the button below to your bookmarks bar.
 
 {% capture bookmarklet %}
-  (() => {
+(() => {
 
 {% include_relative better-github-status-clear.js %}
 
-    if (!BetterGitHubStatusClear.ensureContext()) return;
+if (!BetterGitHubStatusClear.ensureContext()) return;
+BetterGitHubStatusClear.run();
 
-    BetterGitHubStatusClear.run();
-  })();
+})();
 {% endcapture %}
 
 [**Better GH status clear (bookmarklet)**](javascript:{{ bookmarklet | strip_newlines | escape | replace: "|", "%7C" }})
