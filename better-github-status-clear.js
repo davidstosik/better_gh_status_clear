@@ -1,91 +1,84 @@
 class BetterGitHubStatusClear {
-  static run() {
-    const clearStatusDiv = this.getClearStatusDiv();
+  static DEBUG_MODE = false;
 
-    if (!clearStatusDiv?.checkVisibility()) {
+  static get debug() {
+    if (this.DEBUG_MODE) {
+      return console.log.bind(window.console, "[BGHSC]");
+    } else {
+      return function() {};
+    };
+  };
+
+  static run() {
+    this.debug("Triggered.");
+
+    const select = this.getOriginalClearStatusSelect();
+
+    if (!select) {
+      this.debug('Could not find the "clear status" select on the page. Aborting...');
       return;
+    };
+
+    if (select.classList.contains("bghsc")) {
+      this.debug('Job already done. Aborting...');
+      return;
+    };
+
+    select.classList.add("bghsc");
+    if (!this.DEBUG_MODE) {
+      select.parentElement.hidden = true;
     };
 
     var previousDateString = "";
     var previousTimeString = "";
-    var helpMessage = "";
-    var previousDateMatch = null;
 
-    const previousDateInput = clearStatusDiv
-      .querySelector(".js-user-status-expiration-interval-selected");
-
-    if (previousDateInput) {
-      previousDateMatch = previousDateInput
-        .textContent
-        .trim()
-        .match(/^in (?<count>\d+) (?<unit>minute|hour|day|month|year)s?$/);
-    }
-
-    if (previousDateMatch) {
-      const count = parseInt(previousDateMatch.groups.count);
-      var previousDate = new Date();
-
-      switch (previousDateMatch.groups.unit) {
-        case "minute":
-          previousDate.setMinutes(previousDate.getMinutes() + count);
-          break;
-        case "hour":
-          previousDate.setHours(previousDate.getHours() + count);
-          break;
-        case "day":
-          previousDate.setDate(previousDate.getDate() + count);
-          break;
-        case "month":
-          previousDate.setMonth(previousDate.getMonth() + count);
-          break;
-        case "year":
-          previousDate.setFullYear(previousDate.getFullYear() + count);
-          break;
-      };
-
-      const offset = previousDate.getTimezoneOffset();
-      previousDate = new Date(previousDate.getTime() - offset * 60 * 1000);
-
+    var previousDate = null;
+    if (select.value != " ") {
+      previousDate = new Date(select.value);
+      previousDate = new Date(
+        previousDate.getTime() - previousDate.getTimezoneOffset() * 60 * 1000
+      );
       [previousDateString, previousTimeString] = previousDate.toISOString().split("T", 2);
-
       previousTimeString = previousTimeString.split(":", 3).slice(0, 2).join(":");
-      helpMessage = `\
-        <p class="f6 mt-2">
-          (GitHub only returns an imprecise clear date, so the value selected above is likely inaccurate.)
-        </p>`;
     };
+    this.debug("Current clear date/time: " + previousDate);
 
     const html = `\
-      <div class="f5 pt-3 pb-2">
-        <div class="d-inline-block mr-2">Clear status</div>
+      <div>
         <input type="date" class="form-control" name="clear-date" value="${previousDateString}">
         <input type="time" class="form-control" name="clear-time" value="${previousTimeString}">
-        ${helpMessage}
-        <input class="js-user-status-expiration-date-input better-gh-status-clear" type="hidden" name="expires_at" value="">
       </div>`;
 
-    clearStatusDiv.insertAdjacentHTML("beforebegin", html);
+    select.parentElement.parentElement.insertAdjacentHTML("beforeend", html);
 
-    const updateHiddenInput = function(e) {
-      const hiddenInput = document.querySelector(".js-user-status-expiration-date-input");
-      const dateString = hiddenInput.parentElement.querySelector("[name='clear-date']").value;
-      const timeString = hiddenInput.parentElement.querySelector("[name='clear-time']").value;
+    const that = this;
+    const updateSelect = function(e) {
+      that.debug("Updating select with new date...");
+      const container = select.parentElement.parentElement;
+      const dateString = container.querySelector("[name='clear-date']").value;
+      const timeString = container.querySelector("[name='clear-time']").value;
+
+      select.childNodes.forEach((option) => {
+        if (option?.text?.startsWith("Custom")) {
+          option.remove();
+        };
+      });
 
       if (dateString == "") {
-        hiddenInput.value = "";
-        console.log("Erased clear date.");
+        select.value = " ";
+        that.debug("Erased clear date.");
       } else {
-        const dateTime = new Date(`${dateString} ${timeString}`);
-        hiddenInput.value = dateTime.toISOString();
-        console.log(`Set clear date to ${dateTime}.`);
+        const dateTime = new Date(`${dateString} ${timeString}`).toISOString();
+        select.options.add(new Option(`Custom (${dateTime})`, dateTime, true, true));
+        select.value = dateTime;
+        that.debug(`Set clear date to ${dateTime}.`);
       };
     };
 
-    clearStatusDiv.parentElement.querySelector("[name='clear-date']").addEventListener("input", updateHiddenInput);
-    clearStatusDiv.parentElement.querySelector("[name='clear-time']").addEventListener("input", updateHiddenInput);
+    select.parentElement.parentElement.querySelector("[name='clear-date']").addEventListener("input", updateSelect);
+    select.parentElement.parentElement.querySelector("[name='clear-time']").addEventListener("input", updateSelect);
 
-    this.getOriginalClearStatusInput().remove();
-    clearStatusDiv.remove();
+    this.debug("Finished.");
   };
 
   static ensureContext() {
@@ -94,7 +87,7 @@ class BetterGitHubStatusClear {
       return false;
     };
 
-    if (!this.getClearStatusDiv()?.checkVisibility()) {
+    if (!this.getOriginalClearStatusSelect()) {
       alert("Please open the 'Set status' modal first.");
       return false;
     };
@@ -102,12 +95,7 @@ class BetterGitHubStatusClear {
     return true;
   };
 
-  static getClearStatusDiv() {
-    return this.getOriginalClearStatusInput()?.previousElementSibling;
-  };
-
-
-  static getOriginalClearStatusInput() {
-    return document.querySelector("input.js-user-status-expiration-date-input:not(.better-gh-status-clear)");
+  static getOriginalClearStatusSelect() {
+    return document.querySelector("#user-status-dialog-compact select#expires_at");
   };
 }
