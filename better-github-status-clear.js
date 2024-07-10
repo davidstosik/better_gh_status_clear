@@ -27,6 +27,8 @@ class BetterGitHubStatusClear {
     select.classList.add("bghsc");
     if (!this.DEBUG_MODE) {
       select.parentElement.hidden = true;
+    } else {
+      this.debug('Not hiding the select\'s parent since DEBUG_MODE is on.');
     };
 
     var previousDateString = "";
@@ -96,6 +98,7 @@ class BetterGitHubStatusClear {
   };
 
   static getOriginalClearStatusSelect() {
-    return document.querySelector("#user-status-dialog-compact select#expires_at");
+    const xpath = "//div[contains(., 'Edit status')]//select[@id='expires_at']";
+    return document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
   };
 }
